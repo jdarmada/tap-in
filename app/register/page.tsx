@@ -5,7 +5,7 @@ import SignUp from '../components/registerquestions';
 
 const Register: React.FC = () => {
   return (
-    <div >
+    <div  >
       <SignUp />
     </div>
   )

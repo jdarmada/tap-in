@@ -62,7 +62,7 @@ const SignUp: React.FC = () => {
           
           
           <input
-            className='fixed w-[70vw] translate-x-[20vw] translate-y-[25vh] bg-transparent p-3 focus-within:outline-none text-[40px] '
+            className='fixed translate-x-[10vw] translate-y-[25vh] bg-transparent p-3 focus-within:outline-none text-[40px] '
             type={question.inputType}
             name={question.field}
             value={formData[question.field].toString()}
@@ -72,16 +72,21 @@ const SignUp: React.FC = () => {
         );
       case 'button':
         return (
-          question.options?.map((option) => (
-            <button
-              key={option}
-              type="button"
-              onClick={() => handleOptionSelect(question.field, option)}
-              className={formData[question.field].includes(option) ? 'selected' : ''}
-            >
-              {option}
-            </button>
-          ))
+          <div className='w-[50vh] h-40 flex-wrap space-x-2 space-y-2'>
+            {question.options?.map((option) => (
+
+              <button
+                key={option}
+                type="button"
+                onClick={() => handleOptionSelect(question.field, option)}
+                className={`${
+                  formData[question.field].includes(option) ? 'bg-gray-700 text-white' : 'bg-gray-200 text-gray-800'
+                } transition-colors duration-300 ease-in-out hover:bg-gray-400 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+                >
+                {option}
+              </button>
+          ))}
+            </div>
         );
       default:
         return null;
@@ -93,10 +98,12 @@ const SignUp: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2 className='fixed text-2xl translate-x-20 translate-y-60 '>{currentQ.question}</h2>
-      {renderQuestion(currentQ)}
+      <h2 className='fixed translate-y-40 translate-x-20'>{currentQ.question}</h2>
+        
+        {renderQuestion(currentQ)}
+       
       {currentQuestion < questions.length - 1 ? (
-        <button type="button" onClick={handleNext}>Next</button>
+        <button className='fixed translate-x-[75vw] translate-y-[28vh] bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded z-10 ' type="button" onClick={handleNext}>Next</button>
       ) : (
         <button type="submit">Submit</button> 
       )}
