@@ -47,14 +47,14 @@ export const questions: Question[] = [
     id: 'bio',
     field: 'bio',
     question: 'Tell us about yourself',
-    inputType: 'textarea',
+    inputType: 'text',
     placeholder: 'Your bio',
   },
   {
     id: 'website',
     field: 'website',
     question: 'Do you have a website or portfolio?',
-    inputType: 'url',
+    inputType: 'text',
     placeholder: 'https://yourwebsite.com',
   },
   {
