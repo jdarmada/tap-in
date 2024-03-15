@@ -5,7 +5,7 @@ import SignUp from '../components/registerquestions';
 
 const Register: React.FC = () => {
   return (
-    <div  >
+    <div className='flex flex-col justify-center h-[60vh] '>
       <SignUp />
     </div>
   )

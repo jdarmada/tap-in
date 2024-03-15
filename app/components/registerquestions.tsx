@@ -43,14 +43,14 @@ const SignUp: React.FC = () => {
             : [...currentValues, option],
         };
       }
-      return prevState;  // For non-array fields, do nothing (or handle as needed)
+      return prevState; 
     });
   };
 
   const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(formData);
-    // Submit formData to backend or next step
+    
   };
 
   const renderQuestion = (question: Question) => {
@@ -62,7 +62,7 @@ const SignUp: React.FC = () => {
           
           
           <input
-            className='fixed translate-x-[10vw] translate-y-[25vh] bg-transparent p-3 focus-within:outline-none text-[40px] '
+            className='bg-transparent p-3 focus-within:outline-none text-[40px] '
             type={question.inputType}
             name={question.field}
             value={formData[question.field].toString()}
@@ -97,16 +97,19 @@ const SignUp: React.FC = () => {
   const currentQ = questions[currentQuestion];
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2 className='fixed translate-y-40 translate-x-20'>{currentQ.question}</h2>
+    <form onSubmit={handleSubmit} className='flex flex-col items-center justify-center space-y-8'>
+
+      <h2 className='flex flex-row justify-start w-[40vw] text-2xl font-semibold'>{currentQ.question}</h2>
+      <div className='flex items-center space-x-4'>
         
         {renderQuestion(currentQ)}
        
       {currentQuestion < questions.length - 1 ? (
-        <button className='fixed translate-x-[75vw] translate-y-[28vh] bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded z-10 ' type="button" onClick={handleNext}>Next</button>
-      ) : (
-        <button type="submit">Submit</button> 
-      )}
+        <button className='bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded z-10 ' type="button" onClick={handleNext}>Next</button>
+        ) : (
+          <button type="submit">Submit</button> 
+          )}
+          </div>
     </form>
   );
 };
