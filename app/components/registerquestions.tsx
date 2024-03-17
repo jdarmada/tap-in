@@ -5,8 +5,13 @@ import { useState } from 'react'
 import { FormData } from '@/types/types'
 import { questions } from '@/data/RegisterQuestions'
 import { Question } from '@/types/types'
+import { CHECK_EMAIL_EXISTS } from '@/graphql/queries/emailQueries';
+import { gql, useQuery } from '@apollo/client';
+
+
 
 const SignUp: React.FC = () => {
+  
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [formData, setFormData] = useState<FormData>({
     email: '',
@@ -20,7 +25,20 @@ const SignUp: React.FC = () => {
     location: '',
   });
 
-  const handleNext = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleNext = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (currentQuestion === 0) {
+      const { data, loading, error } = await useQuery({
+        query: CHECK_EMAIL_EXISTS,
+        variables: { email: formData.email },
+      });
+
+      if (loading) return; // Handle loading state
+      if (error) return; // Handle error state
+      if (data.emailExists) {
+        alert('An account with this email already exists.');
+        return;
+      }
+    }
     setCurrentQuestion(prevState => prevState + 1);
   };
 
