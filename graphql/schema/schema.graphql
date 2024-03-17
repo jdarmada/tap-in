@@ -1,12 +1,11 @@
-
 scalar Genre
 scalar Description
 scalar LookingFor
 
 type User {
+  id: ID!
   email: String!
   name: String!
-  password: String!       
   genres: [Genre!]!
   describeYourself: [Description!]!
   lookingFor: [LookingFor!]!
@@ -15,28 +14,24 @@ type User {
   location: String
 }
 
-
 type Query {
-  
   getUserByEmail(email: String!): User
+  getUser(id: ID!): User
+  allUsers: [User!]!
 }
 
 type Mutation {
-  
   createUser(input: UserInput!): User
-  updateUser(email: String!, input: UserInput!): User
+  updateUser(id: ID!, input: UserInput!): User
 }
 
-
 input UserInput {
-  email: String
-  name: String
-  password: String
-  genres: [String!]
-  describeYourself: [String!]
-  lookingFor: [String!]
+  email: String!
+  name: String!
+  genres: [String!]!
+  describeYourself: [String!]!
+  lookingFor: [String!]!
   bio: String
   website: String
   location: String
 }
-
