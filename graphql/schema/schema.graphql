@@ -1,6 +1,42 @@
 
+scalar Genre
+scalar Description
+scalar LookingFor
+
+type User {
+  email: String!
+  name: String!
+  password: String!       
+  genres: [Genre!]!
+  describeYourself: [Description!]!
+  lookingFor: [LookingFor!]!
+  bio: String
+  website: String
+  location: String
+}
 
 
 type Query {
-  emailExists(email: String!): Boolean!
+  
+  getUserByEmail(email: String!): User
 }
+
+type Mutation {
+  
+  createUser(input: UserInput!): User
+  updateUser(email: String!, input: UserInput!): User
+}
+
+
+input UserInput {
+  email: String
+  name: String
+  password: String
+  genres: [String!]
+  describeYourself: [String!]
+  lookingFor: [String!]
+  bio: String
+  website: String
+  location: String
+}
+

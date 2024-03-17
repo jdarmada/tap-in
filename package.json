@@ -11,11 +11,12 @@
   "dependencies": {
     "@apollo/client": "^3.9.7",
     "@apollo/experimental-nextjs-app-support": "^0.8.0",
-    "@prisma/client": "^5.11.0",
+    "@prisma/client": "^5.12.0-dev.14",
     "apollo-server-micro": "^3.13.0",
     "clsx": "^2.1.0",
     "framer-motion": "^11.0.13",
     "graphql": "^16.8.1",
+    "graphql-yoga": "^5.2.0",
     "mini-svg-data-uri": "^1.4.4",
     "next": "14.1.0",
     "react": "^18",
@@ -30,12 +31,12 @@
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
     "postcss": "^8",
-    "prisma": "^5.9.1",
+    "prisma": "^5.12.0-dev.14",
     "tailwindcss": "^3.3.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.2"
   },
   "prisma": {
-     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts" 
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   }
 }
