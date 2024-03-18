@@ -18,3 +18,16 @@ export interface Question {
   placeholder?: string;  
   options?: string[];    
 }
+
+
+export interface User {
+  email: string;
+  name: string;
+  password: string;
+  genres: string[];
+  describeYourself: string[];
+  lookingFor: string[];
+  bio: string;
+  website: string;
+  location: string;
+}

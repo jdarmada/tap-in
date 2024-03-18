@@ -25,7 +25,7 @@ const typeDefs = gql`
     id: ID!
     email: String!
     password: String!
-    name: String!
+    name: String
     genres: [Genre!]!
     describeYourself: [Description!]!
     lookingFor: [LookingFor!]!
@@ -36,7 +36,7 @@ const typeDefs = gql`
 
   input CreateUserInput {
     email: String!
-    name: String!
+    name: String
     password: String!
     genres: [String!]!
     describeYourself: [String!]!

@@ -25,7 +25,9 @@
   "exclude": ["node_modules"],
   "ts-node": {
     "compilerOptions": {
-      "module": "CommonJS"
+      "module": "CommonJS",
+      "esModuleInterop": true,
+      "moduleResolution": "Node"
     }
   }
 }

@@ -5,7 +5,7 @@ scalar LookingFor
 type User {
   id: ID!
   email: String!
-  name: String!
+  name: String
   genres: [Genre!]!
   describeYourself: [Description!]!
   lookingFor: [LookingFor!]!
@@ -26,7 +26,7 @@ type Mutation {
 
 input UserInput {
   email: String!
-  name: String!
+  name: String
   genres: [String!]!
   describeYourself: [String!]!
   lookingFor: [String!]!

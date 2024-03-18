@@ -114,6 +114,7 @@ const SignUp: React.FC = () => {
       });
   
       console.log('User created:', data.createUser);
+      localStorage.setItem('currentUser', JSON.stringify(data.createUser));
       router.push('/matches');
       
     } catch (error) {
