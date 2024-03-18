@@ -7,6 +7,7 @@ import { questions } from '@/data/RegisterQuestions'
 import { Question } from '@/types/types'
 import {gql, useMutation, useQuery} from '@apollo/client'
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 
 
@@ -31,6 +32,11 @@ const CREATE_USER_MUTATION = gql`
 `;
 
 const SignUp: React.FC = () => {
+  const questionAnimation = {
+    hidden: { opacity: 0, x: -100 }, // Start from the left and fully transparent
+    visible: { opacity: 1, x: 0 },   // End at the original position and fully opaque
+  };
+  
   const router = useRouter();
   const [createUser, { loading: createUserLoading, error: createUserError }] = useMutation(CREATE_USER_MUTATION);
   
@@ -125,39 +131,39 @@ const SignUp: React.FC = () => {
   };
 
   const renderQuestion = (question: Question) => {
+    const blurBoxStyle = 'backdrop-filter backdrop-blur-lg bg-custom-cream p-4 rounded-lg';
     switch (question.inputType) {
       case 'text':
       case 'email':
       case 'password':
         return (
           
+            <input
+              className='bg-transparent p-3 focus-within:outline-none text-[28px] text-black'
+              type={question.inputType}
+              name={question.field}
+              value={formData[question.field].toString()}
+              onChange={handleChange}
+              placeholder={question.placeholder}
+            />
           
-          <input
-            className='bg-transparent p-3 focus-within:outline-none text-[40px] '
-            type={question.inputType}
-            name={question.field}
-            value={formData[question.field].toString()}
-            onChange={handleChange}
-            placeholder={question.placeholder}
-          />
         );
       case 'button':
         return (
-          <div className='w-[50vh] h-40 flex-wrap space-x-2 space-y-2'>
+          <div className= 'w-[50vh] h-40 flex-wrap space-x-2 space-y-2'>
             {question.options?.map((option) => (
-
               <button
                 key={option}
                 type="button"
                 onClick={() => handleOptionSelect(question.field, option)}
                 className={`${
-                  formData[question.field].includes(option) ? 'bg-gray-700 text-white' : 'bg-gray-200 text-gray-800'
-                } transition-colors duration-300 ease-in-out hover:bg-gray-400 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
-                >
+                  formData[question.field].includes(option) ? 'bg-green-select text-gray-500' : 'bg-gray-200 text-gray-800'
+                } transition-colors duration-300 ease-in-out hover:bg-green-select font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+              >
                 {option}
               </button>
-          ))}
-            </div>
+            ))}
+          </div>
         );
       default:
         return null;
@@ -168,19 +174,23 @@ const SignUp: React.FC = () => {
   const currentQ = questions[currentQuestion];
 
   return (
-    <form onSubmit={handleSubmit} className='flex flex-col items-center justify-center space-y-8'>
+    <form onSubmit={handleSubmit} className='flex flex-col items-center justify-center space-y-8 ml-[40px]'>
+      
+      <div className='backdrop-filter backdrop-blur-sm  p-4 rounded-lg'>
 
-      <h2 className='flex flex-row justify-start w-[40vw] text-2xl font-semibold'>{currentQ.question}</h2>
+      <h2 className='flex flex-row justify-start w-[40vw] text-2xl font-semibold text-tap-blue mb-[24px]'>{currentQ.question}</h2>
       <div className='flex items-center space-x-4'>
         
         {renderQuestion(currentQ)}
        
       {currentQuestion < questions.length - 1 ? (
-        <button className='bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded z-10 ' type="button" onClick={handleNext}>Next</button>
+        <button className='bg-dots hover:bg-dots/55 text-gray-800 font-bold py-2 px-4 rounded z-10 ' type="button" onClick={handleNext}>Next</button>
         ) : (
-          <button type="submit">Submit</button> 
+          <button className='bg-dots hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded z-10 ' type="submit">Submit</button> 
           )}
           </div>
+          </div>
+        
     </form>
   );
 };

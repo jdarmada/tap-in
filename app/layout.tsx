@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { ApolloWrapper } from "@/lib/apollo-wrapper";
 import { DotBackground } from "./components/dotbackground";
 import "./globals.css";
+import Navbar from "./components/navbar";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Navbar/>
         <ApolloWrapper>
           <DotBackground />
           {children}

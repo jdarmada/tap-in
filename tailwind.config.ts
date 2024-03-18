@@ -25,6 +25,15 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+            colors: {
+              'custom-cream': 'rgba(255,252,239,255)',
+              'dots': '#fd9a40',
+              'tap-blue': 'rgba(21,41,48,255)',
+              'green-select': '#3ffc99'
+            }
+          
+        
+      
     },
   },
   plugins: [
@@ -52,6 +61,7 @@ const config: Config = {
       );
     },
   ],
+  
 };
  
 function addVariablesForColors({ addBase, theme }: any) {

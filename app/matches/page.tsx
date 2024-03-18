@@ -67,7 +67,7 @@ const Matches: React.FC = () => {
 
   const handleLogOut = () => {
     localStorage.removeItem('currentUser');
-    router.push('/');
+    router.push('/register');
   }
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error fetching users: {error.message}</div>;
@@ -75,9 +75,9 @@ const Matches: React.FC = () => {
   return (
     <div>
 
-<button onClick={handleLogOut} className='bg-blue-500 text-white p-2 rounded-lg absolute translate-x-[80vw] translate-y-[10vh]'>Log Out</button>
+<button onClick={handleLogOut} className='bg-dots text-white p-2 rounded-lg absolute translate-x-[80vw] translate-y-[10vh]'>Log Out</button>
       <div className="flex flex-col items-center justify-center mt-12">
-        <h1 className="text-3xl font-bold mb-[40px]">Matches by Collaboration Score</h1>
+        <h1 className="text-3xl font-bold mb-[40px] text-tap-blue">Matches by Collaboration Score</h1>
         {matches.map((match, index) => (
           <motion.div
             key={match.user.id}
@@ -86,7 +86,7 @@ const Matches: React.FC = () => {
             transition={{ delay: index * 0.1 }}
             className="mb-4 w-full max-w-md"
           >
-            <div className="group flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow">
+            <div className="group flex justify-between items-center bg-orange-100 p-4 rounded-lg shadow">
               <div className='text-black'>
                 <h2 className="text-xl font-semibold">{match.user.name}</h2>
                 <p className=" ">{match.user.location}</p> 
