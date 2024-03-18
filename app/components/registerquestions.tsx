@@ -6,6 +6,10 @@ import { FormData } from '@/types/types'
 import { questions } from '@/data/RegisterQuestions'
 import { Question } from '@/types/types'
 import {gql, useMutation, useQuery} from '@apollo/client'
+import { useRouter } from 'next/navigation';
+
+
+
 
 
 const CREATE_USER_MUTATION = gql`
@@ -27,6 +31,7 @@ const CREATE_USER_MUTATION = gql`
 `;
 
 const SignUp: React.FC = () => {
+  const router = useRouter();
   const [createUser, { loading: createUserLoading, error: createUserError }] = useMutation(CREATE_USER_MUTATION);
   
   
@@ -97,22 +102,23 @@ const SignUp: React.FC = () => {
           input: {
             email: formData.email,
             name: formData.name,
-            password: formData.password,  // Note: Handling plaintext passwords is not recommended for production
-            genres: formData.genres,  // Ensure this is an array of strings
-            describeYourself: formData.describeYourself,  // Ensure this is an array of strings
-            lookingFor: formData.lookingFor,  // Ensure this is an array of strings
-            bio: formData.bio,  // Can be null
-            website: formData.website,  // Can be null
-            location: formData.location,  // Can be null
+            password: formData.password, 
+            genres: formData.genres,  
+            describeYourself: formData.describeYourself, 
+            lookingFor: formData.lookingFor,  
+            bio: formData.bio,  
+            website: formData.website, 
+            location: formData.location,  
           },
         },
       });
   
       console.log('User created:', data.createUser);
-      // Handle post-creation logic (e.g., redirect, display success message)
+      router.push('/matches');
+      
     } catch (error) {
       console.error('Error creating user:', error);
-      // Handle errors (e.g., display error message to the user)
+     
     }
     
   };
