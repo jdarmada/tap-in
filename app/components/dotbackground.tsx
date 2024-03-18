@@ -4,11 +4,11 @@ import { motion } from 'framer-motion';
 
 
 export function DotBackground() {
-  // Larger movement range to accommodate the larger repeating pattern
+  
   const dotMotionVariants = {
     animate: {
-      x: ["-10%", "10%", "-10%"], // Horizontal movement
-      y: ["-10%", "10%", "-10%"], // Vertical movement
+      x: ["-10%", "10%", "-10%"], 
+      y: ["-10%", "10%", "-10%"], 
       transition: {
         x: {
           repeat: Infinity,
@@ -33,8 +33,8 @@ export function DotBackground() {
         variants={dotMotionVariants}
         animate="animate"
       >
-        <div className="absolute min-w-full min-h-full bg-dot-dots bg-size[00%]"> {/* Adjust the background-size to scale the dots */}
-          {/* Empty div to hold the larger repeating pattern */}
+        <div className="absolute min-w-full min-h-full bg-dot-dots bg-size[500%]">
+          
         </div>
       </motion.div>
     </div>

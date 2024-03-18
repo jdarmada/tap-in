@@ -32,10 +32,6 @@ const CREATE_USER_MUTATION = gql`
 `;
 
 const SignUp: React.FC = () => {
-  const questionAnimation = {
-    hidden: { opacity: 0, x: -100 }, // Start from the left and fully transparent
-    visible: { opacity: 1, x: 0 },   // End at the original position and fully opaque
-  };
   
   const router = useRouter();
   const [createUser, { loading: createUserLoading, error: createUserError }] = useMutation(CREATE_USER_MUTATION);
@@ -131,7 +127,6 @@ const SignUp: React.FC = () => {
   };
 
   const renderQuestion = (question: Question) => {
-    const blurBoxStyle = 'backdrop-filter backdrop-blur-lg bg-custom-cream p-4 rounded-lg';
     switch (question.inputType) {
       case 'text':
       case 'email':
@@ -174,12 +169,12 @@ const SignUp: React.FC = () => {
   const currentQ = questions[currentQuestion];
 
   return (
-    <form onSubmit={handleSubmit} className='flex flex-col items-center justify-center space-y-8 ml-[40px]'>
+    <form onSubmit={handleSubmit} className='flex items-center justify-center space-y-8 '>
       
-      <div className='backdrop-filter backdrop-blur-sm  p-4 rounded-lg'>
+      <div className='flex flex-col backdrop-filter backdrop-blur-sm  p-4 rounded-lg'>
 
-      <h2 className='flex flex-row justify-start w-[40vw] text-2xl font-semibold text-tap-blue mb-[24px]'>{currentQ.question}</h2>
-      <div className='flex items-center space-x-4'>
+      <h2 className='flex flex-row justify-center w-[40vw] text-2xl font-semibold text-tap-blue mb-[24px]'>{currentQ.question}</h2>
+      <div className='flex items-center justify-center'>
         
         {renderQuestion(currentQ)}
        
