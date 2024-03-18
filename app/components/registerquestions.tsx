@@ -5,11 +5,30 @@ import { useState } from 'react'
 import { FormData } from '@/types/types'
 import { questions } from '@/data/RegisterQuestions'
 import { Question } from '@/types/types'
+import {gql, useMutation, useQuery} from '@apollo/client'
 
 
-
+const CREATE_USER_MUTATION = gql`
+  mutation CreateUser($input: CreateUserInput!) {
+    createUser(input: $input) {
+      id
+      email
+      password
+      name
+      genres
+      describeYourself
+      lookingFor
+      bio
+      website
+      location
+      # Assuming 'role' is automatically set by the server and not required as part of the input
+    }
+  }
+`;
 
 const SignUp: React.FC = () => {
+  const [createUser, { loading: createUserLoading, error: createUserError }] = useMutation(CREATE_USER_MUTATION);
+  
   
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [formData, setFormData] = useState<FormData>({
@@ -27,6 +46,7 @@ const SignUp: React.FC = () => {
 
 
   const handleNext = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     // if (currentQuestion === 0) {
     //   const { data, loading, error } = await useQuery({
     //     query: CHECK_EMAIL_EXISTS,
@@ -44,6 +64,7 @@ const SignUp: React.FC = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
     const { name, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,
@@ -52,6 +73,7 @@ const SignUp: React.FC = () => {
   };
 
   const handleOptionSelect = (field: keyof FormData, option: string) => {
+    
     setFormData((prevState) => {
       const currentValues = prevState[field];
       if (Array.isArray(currentValues)) {
@@ -66,9 +88,32 @@ const SignUp: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
+     
+     try {
+      const { data } = await createUser({
+        variables: {
+          input: {
+            email: formData.email,
+            name: formData.name,
+            password: formData.password,  // Note: Handling plaintext passwords is not recommended for production
+            genres: formData.genres,  // Ensure this is an array of strings
+            describeYourself: formData.describeYourself,  // Ensure this is an array of strings
+            lookingFor: formData.lookingFor,  // Ensure this is an array of strings
+            bio: formData.bio,  // Can be null
+            website: formData.website,  // Can be null
+            location: formData.location,  // Can be null
+          },
+        },
+      });
+  
+      console.log('User created:', data.createUser);
+      // Handle post-creation logic (e.g., redirect, display success message)
+    } catch (error) {
+      console.error('Error creating user:', error);
+      // Handle errors (e.g., display error message to the user)
+    }
     
   };
 

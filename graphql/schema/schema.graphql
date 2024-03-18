@@ -22,7 +22,6 @@ type Query {
 
 type Mutation {
   createUser(input: UserInput!): User
-  updateUser(id: ID!, input: UserInput!): User
 }
 
 input UserInput {
@@ -35,3 +34,15 @@ input UserInput {
   website: String
   location: String
 }
+input CreateUserInput {
+  email: String
+  name: String
+  password: String
+  genres: [String!]
+  describeYourself: [String!]
+  lookingFor: [String!]
+  bio: String
+  website: String
+  location: String
+}
+

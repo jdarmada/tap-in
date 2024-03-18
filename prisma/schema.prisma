@@ -19,6 +19,7 @@ model User {
   password String
   genres String[]
   describeYourself String[]
+  lookingFor String[]
   bio String?
   website String?
   location String?

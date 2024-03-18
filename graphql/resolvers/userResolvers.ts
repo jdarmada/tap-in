@@ -14,30 +14,23 @@ interface UserInput {
   location?: string;
 }
 
-// const userResolvers = {
-//   Query: {
-//     getUser: async (_: any, { id }: { id: string }) => {
-//       return await prisma.user.findUnique({
-//         where: { id: parseInt(id, 10) }, // Converting id to number as Prisma expects it
-//       });
-//     },
-//     getAllUsers: async () => {
-//       return await prisma.user.findMany();
-//     },
-//   },
-//   Mutation: {
-//     createUser: async (_: any, { userInput }: { userInput: UserInput }) => {
-//       return await prisma.user.create({
-//         data: userInput,
-//       });
-//     },
-//     updateUser: async (_: any, { id, userInput }: { id: string; userInput: UserInput }) => {
-//       return await prisma.user.update({
-//         where: { id: parseInt(id, 10) },
-//         data: userInput,
-//       });
-//     },
-//   },
-// };
+const userResolvers = {
+  Query: {
+    // Adjust to find a user by email
+    // getUser: async (_: any, { email }: { email: string }) => {
+    //   return await prisma.user.findUnique({
+    //     where: { email }, // Use email to find the user
+    //   });
+    // },
+   
+  },
+  Mutation: {
+    createUser: async (_: any, { input }: { input: UserInput }) => {
+      return await prisma.user.create({
+        data: input, // 'data' property correctly structured
+      });
+    },
+  }
+};
 
-// export default userResolvers;
+export default userResolvers;
